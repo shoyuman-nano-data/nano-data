@@ -32,7 +32,7 @@ npm ci
 npm run build
 ```
 
-The supplied generated worker is included. The original package build used esbuild 0.28.2 and passed 192 source tests, 37 owner-bundle tests and 20 judge-bundle tests. For this deadline-only update, the operator reports focused source4/4, focused bundle4/4, owner bundle37/37 and deadline transition1/1 passing; the prior full suites were not rerun by this packaging check. Those tests are not real inference or a measurement of model quality.
+The supplied generated worker is included. This private candidate independently reproduces its exact hash using the existing pinned esbuild0.28.2 and passes10 focused synthetic bridge/postcommit/UI/replacement checks. The operator reports source197/197 and bundle21/21 at the applied checkpoint; this packaging task did not rerun those full suites. Tests are not real inference or a measurement of model quality.
 
 ## NVIDIA and Nebius
 
@@ -45,18 +45,18 @@ See the extracted `README.md`, `.env.example`, `.env.judge-trial.example` and `J
 Archive SHA-256:
 
 ```text
-09715bbd9ef2d757b4246504ad34e75fe0bd9338435161a8983468dd096475d6
+4921c70616b9f835bdd4630b67bb1f65b5ef13f884bec8f7c1a2d683749ba7b3
 ```
 
 Bundled `nano-data-source/worker.mjs` SHA-256:
 
 ```text
-d190204be7b45305ac8fb1bdc3f08a7b193ec5b5dc25c830e029428d60886d87
+8312a888670538ee5019752719259fb15f8abdc97d2bd0cc32aec1b02cbf5771
 ```
 
-This matches the local runtime bundle in the recorded 27 October 2026 17:51:36 UTC pilot deployment, version `978703fa-782f-4b9d-a33b-8f385f347c9e`. This is a dated operator deployment record and reproducible source identity, not a fresh extraction from the host or a claim that no later deployment exists. This deadline-extension ZIP supersedes the original b713 archive; historical commit 4fd8f8d753578e59bacd779f580f15ce902dc146 preserves that earlier package. `SHA256SUMS.json` inside verifies 73 payload files; the archive contains 74 files including that manifest.
+This matches the local runtime bundle in the recorded 28 October 2026 10:03:27 UTC pilot deployment, version `894a64e6-8834-4bcc-b8a5-be49d4704ef6`. This is a dated operator deployment record and reproducible source identity, not a fresh extraction from the host or a claim that no later deployment exists. This private postcommit-recovery candidate succeeds the d190 source at public commit a883475946e30b91a1719fa85becfd3820b35959; this task does not modify any public commit. Historical commit 4fd8f8d753578e59bacd779f580f15ce902dc146 preserves the original b713 package. `SHA256SUMS.json` inside verifies 76 payload files; the archive contains 77 files including that manifest.
 
-Nonsensitive pilot labels, public hostname and the 28 October 2026 05:00 UTC cutoff remain in executable code to preserve exact reproducibility. They are not credentials. The bridge is deliberately bounded and expires; do not broaden it for a new installation. Leave `JUDGE_TRIAL_PILOT_BRIDGE` unset and use separately reviewed isolated-judge provisioning for a new deployment. Operational hosting config, database/account identifiers, private access codes, grant hashes and authentication files are excluded.
+Nonsensitive pilot labels, public hostname and the 28 October 2026 13:00 UTC cutoff remain in executable code to preserve exact reproducibility. They are not credentials. The bridge is deliberately bounded and expires; do not broaden it for a new installation. Leave `JUDGE_TRIAL_PILOT_BRIDGE` unset and use separately reviewed isolated-judge provisioning for a new deployment. Operational hosting config, database/account identifiers, private access codes, grant hashes and authentication files are excluded.
 
 ## What has and has not been demonstrated
 
@@ -64,8 +64,16 @@ A historical real Nemotron-through-Nebius synthetic handoff produced a receiver 
 
 The later dated pilot deployment was recorded with **zero real pilot model calls** at the reviewed checkpoint. Historical real inference must not be attributed to that pilot as though it were a successful new run. Local tests, deployment and saved-result playback are different kinds of evidence.
 
-General lossless compression, superiority over other models, cost savings, unrestricted autonomous execution and final judging readiness are not established. A finite, non-distributed two-call pilot ending at 28 October 2026 05:00 UTC is not the final judging-period access contract. Public source publication does not resolve that contract. Session-bound storage has limitations; elapsed retention does not prove physical deletion, and no production purge scheduler is claimed. Cost guards are estimates, not billing hard caps. Final judge access, continued availability and final submission remain separate work.
+General lossless compression, superiority over other models, cost savings, unrestricted autonomous execution and final judging readiness are not established. A finite, non-distributed two-call pilot ending at 28 October 2026 13:00 UTC is not the final judging-period access contract. Public source publication does not resolve that contract. Session-bound storage has limitations; elapsed retention does not prove physical deletion, and no production purge scheduler is claimed. Cost guards are estimates, not billing hard caps. Final judge access, continued availability and final submission remain separate work.
 
-## Deadline-only update
+## Postcommit login recovery — 28 October 2026
 
-Approved at 17:45:56 UTC on 27 October: extend existing owner and pilot deadlines only to 28 October 2026 05:00 UTC. Runtime changes are limited to one pilot-bridge date literal and its rebuilt worker. Existing owner100/estimatedUSD0.06 and pilot2/estimatedUSD0.02 remain unchanged; no new grant, key, dataset or model invocation is claimed. The operator reports deployment at17:51:36 UTC; source identity does not by itself verify remote policy values. This finite extension is not unrestricted final judging access.
+The operator recorded an explicitly approved postcommit login fix and one further replacement-login allowance. If usage or case-detail retrieval fails after a session is committed, the response retains that same session cookie and marks details pending; execution remains disabled until a GET refresh confirms details. The UI does not repeat login. This fixes the reproduced synthetic postcommit failure, not every possible production cause: transport loss, cookie refusal and uncertain commit state remain separate.
+
+The cumulative max_sessions predicate is now3. The prior active session was revoked; sessions_issued2 and two revoked historical sessions were retained at the operator10:03 checkpoint. There was one remaining login issuance at that dated checkpoint, not three new sessions. No new grant/code, counter reset or extra inference allowance was created. Total model-call ceiling2 and estimated USD0.02 guard remain unchanged; the guard is not a billing cap. Pilot expiry remains13:00 UTC; owner expiry remains05:00 UTC and was not reactivated. The existing case-metadata capacity formula rises from4 to5; the authorized operational synthetic case remains one.
+
+Operator receipt records deployment894a64e6-8834-4bcc-b8a5-be49d4704ef6 at10:03:27 UTC and zero runs at that checkpoint. Subsequent activity is not determined by this package. Operator-reported tests: source197/197 and bundle21/21; synthetic old-version postcommit regression1PASS2FAIL became3PASS. This packaging check independently rebuilds the worker and runs only focused synthetic tests. It does not rerun the full suites or call a real provider.
+
+New regression tests and their synthetic fixture are included for offline reproducibility. Operational SQL, database snapshots, authentication state and private grants are not bundled. The portable replacement-login fixture uses a fixed synthetic clock rather than wall-clock time; it is not a production administration script.
+
+This is a private publication candidate, not permission to publish, deploy, extend access, retry model calls or submit. Existing public commits are not modified. Finite pilot access remains distinct from final judging-period access.
