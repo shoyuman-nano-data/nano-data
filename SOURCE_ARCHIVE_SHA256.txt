@@ -1,9 +1,10 @@
-159b53e64199177abd937cb0536b2c86d7020423183aed3f7dd4771fd38f98a8  NANO_DATA_MATCHING_PILOT_SOURCE_20261027.zip
+09715bbd9ef2d757b4246504ad34e75fe0bd9338435161a8983468dd096475d6  NANO_DATA_MATCHING_PILOT_SOURCE_20261027.zip
 
-# Archive size: 208004 bytes
+# Archive size: 208243 bytes
 # Root: nano-data-source/
 # Entries: 74 files; SHA256SUMS.json lists 73 payload hashes (manifest excluded).
-# Bundled worker SHA256: b713c01d5da5e73507fe5a967c1f1b05894adff4d9943ca82da088b7a8e96421
+# Bundled worker SHA256: d190204be7b45305ac8fb1bdc3f08a7b193ec5b5dc25c830e029428d60886d87
+# Deadline-only update: 2026-10-28T05:00:00.000Z
 # Exact archive contents:
 # nano-data-source/.env.example
 # nano-data-source/.env.judge-trial.example

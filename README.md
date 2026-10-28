@@ -32,7 +32,7 @@ npm ci
 npm run build
 ```
 
-The supplied generated worker is included. This packaging run reproduced its exact hash using esbuild 0.28.2. Offline verification passed 192 source tests, 37 owner-bundle tests and 20 judge-bundle tests. Those tests are not real inference or a measurement of model quality.
+The supplied generated worker is included. The original package build used esbuild 0.28.2 and passed 192 source tests, 37 owner-bundle tests and 20 judge-bundle tests. For this deadline-only update, the operator reports focused source4/4, focused bundle4/4, owner bundle37/37 and deadline transition1/1 passing; the prior full suites were not rerun by this packaging check. Those tests are not real inference or a measurement of model quality.
 
 ## NVIDIA and Nebius
 
@@ -45,18 +45,18 @@ See the extracted `README.md`, `.env.example`, `.env.judge-trial.example` and `J
 Archive SHA-256:
 
 ```text
-159b53e64199177abd937cb0536b2c86d7020423183aed3f7dd4771fd38f98a8
+09715bbd9ef2d757b4246504ad34e75fe0bd9338435161a8983468dd096475d6
 ```
 
 Bundled `nano-data-source/worker.mjs` SHA-256:
 
 ```text
-b713c01d5da5e73507fe5a967c1f1b05894adff4d9943ca82da088b7a8e96421
+d190204be7b45305ac8fb1bdc3f08a7b193ec5b5dc25c830e029428d60886d87
 ```
 
-This matches the local runtime bundle in the recorded 27 October 2026 15:46:49 UTC pilot deployment, version `55f4eab8-6e67-42bc-9b36-c47087755cbb`. This is a dated operator deployment record and reproducible source identity, not a fresh extraction from the host or a claim that no later deployment exists. The ZIP is unchanged from the verified source package. `SHA256SUMS.json` inside verifies 73 payload files; the archive contains 74 files including that manifest.
+This matches the local runtime bundle in the recorded 27 October 2026 17:51:36 UTC pilot deployment, version `978703fa-782f-4b9d-a33b-8f385f347c9e`. This is a dated operator deployment record and reproducible source identity, not a fresh extraction from the host or a claim that no later deployment exists. This deadline-extension ZIP supersedes the original b713 archive; historical commit 4fd8f8d753578e59bacd779f580f15ce902dc146 preserves that earlier package. `SHA256SUMS.json` inside verifies 73 payload files; the archive contains 74 files including that manifest.
 
-Nonsensitive pilot labels, public hostname and the 27 October 2026 18:00 UTC cutoff remain in executable code to preserve exact reproducibility. They are not credentials. The bridge is deliberately bounded and expires; do not broaden it for a new installation. Leave `JUDGE_TRIAL_PILOT_BRIDGE` unset and use separately reviewed isolated-judge provisioning for a new deployment. Operational hosting config, database/account identifiers, private access codes, grant hashes and authentication files are excluded.
+Nonsensitive pilot labels, public hostname and the 28 October 2026 05:00 UTC cutoff remain in executable code to preserve exact reproducibility. They are not credentials. The bridge is deliberately bounded and expires; do not broaden it for a new installation. Leave `JUDGE_TRIAL_PILOT_BRIDGE` unset and use separately reviewed isolated-judge provisioning for a new deployment. Operational hosting config, database/account identifiers, private access codes, grant hashes and authentication files are excluded.
 
 ## What has and has not been demonstrated
 
@@ -64,4 +64,8 @@ A historical real Nemotron-through-Nebius synthetic handoff produced a receiver 
 
 The later dated pilot deployment was recorded with **zero real pilot model calls** at the reviewed checkpoint. Historical real inference must not be attributed to that pilot as though it were a successful new run. Local tests, deployment and saved-result playback are different kinds of evidence.
 
-General lossless compression, superiority over other models, cost savings, unrestricted autonomous execution and final judging readiness are not established. A finite, non-distributed two-call pilot ending at 18:00 UTC is not the final judging-period access contract. Public source publication does not resolve that contract. Session-bound storage has limitations; elapsed retention does not prove physical deletion, and no production purge scheduler is claimed. Cost guards are estimates, not billing hard caps. Final judge access, continued availability and final submission remain separate work.
+General lossless compression, superiority over other models, cost savings, unrestricted autonomous execution and final judging readiness are not established. A finite, non-distributed two-call pilot ending at 28 October 2026 05:00 UTC is not the final judging-period access contract. Public source publication does not resolve that contract. Session-bound storage has limitations; elapsed retention does not prove physical deletion, and no production purge scheduler is claimed. Cost guards are estimates, not billing hard caps. Final judge access, continued availability and final submission remain separate work.
+
+## Deadline-only update
+
+Approved at 17:45:56 UTC on 27 October: extend existing owner and pilot deadlines only to 28 October 2026 05:00 UTC. Runtime changes are limited to one pilot-bridge date literal and its rebuilt worker. Existing owner100/estimatedUSD0.06 and pilot2/estimatedUSD0.02 remain unchanged; no new grant, key, dataset or model invocation is claimed. The operator reports deployment at17:51:36 UTC; source identity does not by itself verify remote policy values. This finite extension is not unrestricted final judging access.
