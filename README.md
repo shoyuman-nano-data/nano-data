@@ -2,78 +2,66 @@
 
 **Keep the source. Carry the purpose. Continue the work.**
 
-NANO DATA is a source-linked AI handoff prototype. It retains the original record, purpose, reason and next action; produces a compact CORE; then lets a separately reviewed receiver request continue the task. Saved results and references remain available for human inspection.
+A source-linked AI handoff prototype: keep the original, purpose, reason and next action; produce a compact CORE; explicitly request a receiver continuation; inspect saved results and references. Producer and receiver are separate requests to the same configured NVIDIA Nemotron model through Nebius Token Factory, not independent vendors.
 
-## Official source distribution
+## Current source and deployment boundary
 
-The full source is distributed in **[NANO_DATA_MATCHING_PILOT_SOURCE_20261027.zip](NANO_DATA_MATCHING_PILOT_SOURCE_20261027.zip)** in this repository. GitHub's code browser shows this archive, not an expanded source tree. Download and extract it to inspect all source modules, frontend assets, tests, migrations, build files and setup instructions. It is source code, not only an executable binary. The root MIT license is an unchanged copy of the license inside the archive; its original copyright attribution is retained.
+This package matches the source bundle uploaded in the recorded 2026-10-28 15:47:57 UTC code-only deployment, version `175f72d3-802b-4172-ae74-ea228f778815`:
 
-[Exact file map and checksum](SOURCE_ARCHIVE_SHA256.txt) · [MIT license](LICENSE)
+`2d05d6b09de7786877f09a302b216974aa02bc323b87c948e44938ba1de58853`
 
-### Download, verify and run offline tests
+This is the local no-bundle upload identity from the operator receipt, not a newly extracted remote source hash. It supersedes public commit f3115ee9d1c8485b29e566cd12c2673b1b6c6ffd's worker8312 source. Runtime code, static assets, tests and migrations are included. No operational hosting configuration, databases, private grants or credentials are included.
 
-Download the source ZIP and `SOURCE_ARCHIVE_SHA256.txt` from this repository into the same directory. On a system with `sha256sum` and `unzip`:
+**Final judging remains disabled.** At the recorded checkpoint the dedicated provider connection was not configured, final runtime/cost-policy settings were absent, and the expired pilot bridge remained. Code/schema deployment is not usable final access, a successful new AI journey, or submission. This package does not enable anything. Historical pilot dates and non-secret labels in executable code are retained for exact reproducibility, not permission to execute requests.
 
-```sh
-sha256sum --check SOURCE_ARCHIVE_SHA256.txt
-unzip NANO_DATA_MATCHING_PILOT_SOURCE_20261027.zip
-cd nano-data-source
-# Node.js 24 or later; these tests use local SQLite and mocked model transports.
-npm test
-npm run test:bundle
-npm run test:judge-bundle
-```
+## Build and offline checks
 
-The archive has exactly one root directory, `nano-data-source/`. For rebuilding:
+### Verify the supplied source and bundle without installing packages
+
+Use Node.js 24 or later and a POSIX shell (Linux/macOS). From the extracted `nano-data-source/` directory, run the four commands below. These checks use the supplied files and Node's built-in test runner; they do not require `npm ci`, an API key, an account, a database connection, or a running hosted app. Do not open a live app to run these checks.
 
 ```sh
-# Downloads the lockfile-pinned esbuild dependency and runs its install script.
-npm ci
-npm run build
+# Source suite: expected 234 passing tests for this exact package.
+node --import ./evidence/no-network.mjs --test evidence/*.test.mjs
+
+# Supplied seed bundle: expected 37 passing tests.
+SEED_APP_MODULE=../worker.mjs node --import ./evidence/no-network.mjs --test evidence/seed-chain.test.mjs
+
+# Supplied judge bundle: expected 21 passing tests.
+JUDGE_UI_APP_MODULE=../worker.mjs JUDGE_APP_MODULE=../worker.mjs JUDGE_ADVERSARIAL_MODULE=../worker.mjs JUDGE_FAULT_MODULE=../worker.mjs node --import ./evidence/no-network.mjs --test evidence/judge-trial.test.mjs evidence/judge-isolation-adversarial.test.mjs evidence/judge-bundle-fault.test.mjs evidence/judge-ui-handler.test.mjs
+
+# Supplied final-mode bundle: expected 17 passing tests.
+JUDGE_FINAL_APP_MODULE=../worker.mjs node --import ./evidence/no-network.mjs --test evidence/judge-final-route.test.mjs
 ```
 
-The supplied generated worker is included. This private candidate independently reproduces its exact hash using the existing pinned esbuild0.28.2 and passes10 focused synthetic bridge/postcommit/UI/replacement checks. The operator reports source197/197 and bundle21/21 at the applied checkpoint; this packaging task did not rerun those full suites. Tests are not real inference or a measurement of model quality.
+Each command must exit with code 0 and report zero failed tests. The `no-network.mjs` preload rejects global `fetch`; provider transports and database fixtures in these tests are synthetic. Passing tests do not establish live provider connectivity, final judging availability, semantic accuracy or a real-user journey. These counts apply to the exact 2d05 package, not later UI or budget candidates.
 
-## NVIDIA and Nebius
+On 29 October 2026, these commands were verified with Node.js 24.22.1 from a fresh extraction of this archive, without `node_modules` or package installation. This is an offline reproducibility check, not a deployment or fresh inference.
 
-The prototype uses `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` through Nebius Token Factory's server-side chat-completions API. Producer and receiver are separate requests to the configured model, not independent vendors. The frontend and database layer use Cloudflare Workers and D1. Provider keys belong only in server secret storage; none are included in this repository or sent to the browser.
+The `replacement-login.test.mjs` from the private candidate is intentionally excluded: it depends on an operational SQL file outside the source tree and wall-clock-sensitive history. No operational fixture was imported or fabricated. Therefore these commands validate the included suite, not every historical test.
 
-See the extracted `README.md`, `.env.example`, `.env.judge-trial.example` and `JUDGE_TRIAL_DESIGN_HISTORY.md` for server bindings, disabled defaults and setup boundaries. These environment files are inventories, not automatic configuration. The runtime is a Cloudflare Worker, not a standalone Node HTTP server. Deployment requires separately provisioned databases, server settings and authorized credentials. The supplied test suite works offline without those operational resources. Do not reuse a historical policy label as permission to send requests.
+To rebuild, `npm ci` installs lockfile-pinned esbuild0.28.2 and runs its install script (requires network on a fresh machine); then `npm run build`. The supplied worker runs on Cloudflare Workers, not a standalone Node HTTP server. MIT license and third-party notices are included. SHA256SUMS.json covers every archive payload except itself.
 
-## Source and deployment identity
+## Runtime setup and safe defaults
 
-Archive SHA-256:
+See JUDGE_TRIAL_SETUP.md and release/ for design/history. Historical documents, including README_BASELINE_HISTORY.md and BASE_PROVENANCE.json, are dated background, not current deployment state or authorization. This README and SOURCE_RELEASE.json define this package identity.
 
-```text
-4921c70616b9f835bdd4630b67bb1f65b5ef13f884bec8f7c1a2d683749ba7b3
-```
+Provision owner and isolated judge databases separately. Do not blindly rerun migrations against existing databases. Migration0006 uses a local helper and is not a standalone production D1 script. The 0007 costguard schema was already applied to the live isolated judge database according to the deployment receipt; its PROPOSED filename is retained to preserve source identity, not an instruction to apply it again. Owner database was not changed. Deployments need separately authorized server settings and credentials; keys must never enter browser or source. Disabled JSON files are human-readable inventories, not ready-to-deploy configurations.
 
-Bundled `nano-data-source/worker.mjs` SHA-256:
+## Costguard and limitations
 
-```text
-8312a888670538ee5019752719259fb15f8abdc97d2bd0cc32aec1b02cbf5771
-```
+The final-mode path adds atomic lifetime monetary reservations immediately before model send, shared across sessions/grants, with no reservation refunds, resets or automatic retry after unknown outcomes. It validates model/price/context metadata and fails closed; legacy/final mixed configurations are rejected. These application reservations are **not an invoice hard cap**, proof of eligible free credits, or a guarantee against card charges. No unlimited judging availability, organizer exception, production concurrency benchmark or physical purge scheduler is claimed.
 
-This matches the local runtime bundle in the recorded 28 October 2026 10:03:27 UTC pilot deployment, version `894a64e6-8834-4bcc-b8a5-be49d4704ef6`. This is a dated operator deployment record and reproducible source identity, not a fresh extraction from the host or a claim that no later deployment exists. This private postcommit-recovery candidate succeeds the d190 source at public commit a883475946e30b91a1719fa85becfd3820b35959; this task does not modify any public commit. Historical commit 4fd8f8d753578e59bacd779f580f15ce902dc146 preserves the original b713 package. `SHA256SUMS.json` inside verifies 76 payload files; the archive contains 77 files including that manifest.
+Receiver resource bounds do not prove semantic quality or absence of truncation. General lossless compression, superiority over other models and cost savings have not been established. A historical real synthetic Nemotron/Nebius handoff and saved-result playback exist separately; they must not be described as a successful final-judging journey. The video https://youtu.be/7pmSm6-GUSA is saved-work replay, not fresh live inference. Current playback was not checked by this packaging task.
 
-Nonsensitive pilot labels, public hostname and the 28 October 2026 13:00 UTC cutoff remain in executable code to preserve exact reproducibility. They are not credentials. The bridge is deliberately bounded and expires; do not broaden it for a new installation. Leave `JUDGE_TRIAL_PILOT_BRIDGE` unset and use separately reviewed isolated-judge provisioning for a new deployment. Operational hosting config, database/account identifiers, private access codes, grant hashes and authentication files are excluded.
+## Testing the hosted app
 
-## What has and has not been demonstrated
+The recorded app entry is https://nano-data-judge-test-20261025.shoyuman-official.workers.dev/judge . The URL alone does not establish usable access. Final private access provisioning and one authorized fictional-data producer → explicit receiver → save/reload journey remain separate prerequisites. Do not use historical pilot credentials, extend access, retry uncertain model calls, or assume this package grants spending authority. Final availability and formal submission remain incomplete at the recorded checkpoint.
 
-A historical real Nemotron-through-Nebius synthetic handoff produced a receiver preparation checklist, retained the listed resources and unknown outcomes, and was saved and reopened with its original reference. That useful result followed an explicitly approved additional receiver trial; it is not a first-attempt success-rate claim. The 150-second video is a replay of saved application work, not new live inference: https://youtu.be/7pmSm6-GUSA . Public visibility was reported by the operator on 27 October at approximately 09:26 UTC; this README does not independently establish current playback or visibility.
+## Source archive
 
-The later dated pilot deployment was recorded with **zero real pilot model calls** at the reviewed checkpoint. Historical real inference must not be attributed to that pilot as though it were a successful new run. Local tests, deployment and saved-result playback are different kinds of evidence.
+Download and extract NANO_DATA_MATCHING_PILOT_SOURCE_20261027.zip (the established repository filename is retained). The code browser displays the archive rather than an expanded tree. Verify it with `sha256sum --check SOURCE_ARCHIVE_SHA256.txt`.
 
-General lossless compression, superiority over other models, cost savings, unrestricted autonomous execution and final judging readiness are not established. A finite, non-distributed two-call pilot ending at 28 October 2026 13:00 UTC is not the final judging-period access contract. Public source publication does not resolve that contract. Session-bound storage has limitations; elapsed retention does not prove physical deletion, and no production purge scheduler is claimed. Cost guards are estimates, not billing hard caps. Final judge access, continued availability and final submission remain separate work.
+## This package verification
 
-## Postcommit login recovery — 28 October 2026
-
-The operator recorded an explicitly approved postcommit login fix and one further replacement-login allowance. If usage or case-detail retrieval fails after a session is committed, the response retains that same session cookie and marks details pending; execution remains disabled until a GET refresh confirms details. The UI does not repeat login. This fixes the reproduced synthetic postcommit failure, not every possible production cause: transport loss, cookie refusal and uncertain commit state remain separate.
-
-The cumulative max_sessions predicate is now3. The prior active session was revoked; sessions_issued2 and two revoked historical sessions were retained at the operator10:03 checkpoint. There was one remaining login issuance at that dated checkpoint, not three new sessions. No new grant/code, counter reset or extra inference allowance was created. Total model-call ceiling2 and estimated USD0.02 guard remain unchanged; the guard is not a billing cap. Pilot expiry remains13:00 UTC; owner expiry remains05:00 UTC and was not reactivated. The existing case-metadata capacity formula rises from4 to5; the authorized operational synthetic case remains one.
-
-Operator receipt records deployment894a64e6-8834-4bcc-b8a5-be49d4704ef6 at10:03:27 UTC and zero runs at that checkpoint. Subsequent activity is not determined by this package. Operator-reported tests: source197/197 and bundle21/21; synthetic old-version postcommit regression1PASS2FAIL became3PASS. This packaging check independently rebuilds the worker and runs only focused synthetic tests. It does not rerun the full suites or call a real provider.
-
-New regression tests and their synthetic fixture are included for offline reproducibility. Operational SQL, database snapshots, authentication state and private grants are not bundled. The portable replacement-login fixture uses a fixed synthetic clock rather than wall-clock time; it is not a production administration script.
-
-This is a private publication candidate, not permission to publish, deploy, extend access, retry model calls or submit. Existing public commits are not modified. Finite pilot access remains distinct from final judging-period access.
+Packaging verification: included source tests234/234; existing bundle37/37; judge bundle21/21; final-mode bundle17/17 passed with global fetch blocked and synthetic transports. The pilot regression uses an explicit synthetic clock so the historical expiry does not invalidate its fixture; runtime code and cutoff are unchanged. Rebuild reproduced the exact worker SHA above. These are local checks, not real model calls or browser acceptance tests.
